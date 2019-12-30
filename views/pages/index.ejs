@@ -11,6 +11,14 @@
     <header>
         <%=data%>
     </header>
-    
+    <form action="/searches" method="POST">
+        <br>
+        <input type="text" name="input" placeholder="type the name" required>
+        <p>Please select your type</p>
+        <input  type="radio" name="select" value="author" required>author <br><br> 
+        <input  type="radio" name="select" value="title" required>title <br>
+        <button type="submit">submit</button>
+    </form>
+    <!-- <p><%=root%></p> -->
 </body>
 </html>
