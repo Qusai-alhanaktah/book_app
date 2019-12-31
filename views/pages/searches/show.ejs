@@ -15,10 +15,12 @@
         <% books.forEach(book => { %>
             <li> 
                 <img src="<%= book.imgUrl %>"> 
+                <h2><%=book.title %></h2>
+                <h3><%=book.authors%></h3>
+                <p><%=book.desc%></p>
 
             </li>
         <% }) %>
     </ul>
-    <!-- <p><%=root%></p> -->
 </body>
 </html>

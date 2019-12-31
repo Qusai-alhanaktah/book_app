@@ -20,7 +20,6 @@ server.get('/', (req, res) => {
 
 server.post('/searches', (req, res) => {
     const url = `https://www.googleapis.com/books/v1/volumes?q=${req.body.select}+${req.body.input}`;
-    console.log(url);
     superagent.get(url)
         .then(data => {
             let jsaonData = data.body.items;
