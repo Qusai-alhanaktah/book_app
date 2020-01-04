@@ -24,6 +24,13 @@ server.get('/new', addBooks);
 server.post('/search', searcheData);
 server.post('/new', processAdd);
 server.get('/books/:book_id', getSpecificBook);
+server.post('/edit', edaitSelected);
+
+
+function edaitSelected(req,res){
+    // console.log(req.body)
+    res.render('pages/books/show', {book:req.body})
+}
 
 function getSpecificBook(req,res){
     let SQL = `SELECT * FROM book WHERE id=$1`;
@@ -31,7 +38,8 @@ function getSpecificBook(req,res){
     let values =[id];
     client.query(SQL,values)
     .then(data=>{
-        res.render('pages/books/detail.ejs',{book: data.rows});
+        // console.log(data.rows)
+        res.render('pages/books/detail',{book: data.rows[0]});
     }).catch(err=>handleError(err));
 }
 
@@ -46,9 +54,9 @@ function addBooks(req,res){
     res.render('pages/searches/new')
 }
 function processAdd(req,res){
-    console.log(req.body)
+    // console.log(req.body)
     let { image_url, title, author, description, isbn, bookshelf } = req.body
-    let SQL = `INSERT INTO books (image_url, title, author, description, isbn, bookshelf) VALUES ($1, $2, $3, $4, $5, $6)`
+    let SQL = `INSERT INTO book (image_url, title, author, description, isbn, bookshelf) VALUES ($1, $2, $3, $4, $5, $6)`
     let values = [image_url, title, author, description, isbn, bookshelf]
 
     client.query(SQL, values)
@@ -67,9 +75,9 @@ function searcheData(req, res){
 }
 function Book(data) {
     this.title = data.volumeInfo.title? data.volumeInfo.title: "No Title Available";
-    this.imgUrl = (data.volumeInfo.imageLinks && data.volumeInfo.imageLinks.thumbnail) ? data.volumeInfo.imageLinks.thumbnail:"https://i.imgur.com/J5LVHEL.jpg";
-    this.authors = data.volumeInfo.authors? data.volumeInfo.authors: "No Authors";
-    this.desc = data.volumeInfo.description? data.volumeInfo.description:"No description available";
+    this.image_url = (data.volumeInfo.imageLinks && data.volumeInfo.imageLinks.thumbnail) ? data.volumeInfo.imageLinks.thumbnail:"https://i.imgur.com/J5LVHEL.jpg";
+    this.author = data.volumeInfo.authors? data.volumeInfo.authors: "No Authors";
+    this.description = data.volumeInfo.description? data.volumeInfo.description:"No description available";
 }
 
 
