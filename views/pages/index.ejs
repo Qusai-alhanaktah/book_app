@@ -12,15 +12,35 @@
 </head>
 <body>
     <header>
-        <h1>Book App</h1>
-    </header>
-    <form action="/searches" method="POST">
+        <a href="/new">Add a New Book</a>
+        <a href="/">Home</a>  
+           </header> 
+    <section>
+        <ul>
+            <% booksList.forEach(book => { %>
+                <li>
+                        <img src=<%= book.image_url%>>
+                        <h2 class="title"><%= book.title%></h2>
+                        <h3 class="author"><%= book.author%></h3>
+                    <form action="/books/<%= book.id%>" method="GET">
+                        <button type="submit">View Details</button>
+                    </form>
+                </li>
+                <% }) %>
+            <!-- <% booksList.forEach(book => { %>
+                <li>
+                    <a href="/show/<%= booksList.id %>"><%= booksList.title %></a>
+                </li>
+            <% })%> -->
+        </ul>
+    </section>
+    <!-- <form action="/searches" method="POST">
         <br>
         <input type="text" name="input" placeholder="type the name" required>
         <p>Please select your type</p>
         <input  type="radio" name="select" value="author" required>author <br><br> 
         <input  type="radio" name="select" value="title" required>title <br>
         <button type="submit">submit</button>
-    </form>
+    </form> -->
 </body>
 </html>

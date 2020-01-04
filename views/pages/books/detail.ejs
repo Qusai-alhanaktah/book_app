@@ -12,22 +12,12 @@
             <a href="/">Home</a>  
                </header> 
   <ul>
-    <% books.forEach(book => { %>
-        <li> 
             <img src="<%= book.imgUrl %>"> 
-                <h2><%=book.title %></h2>
+            <h2><%=book.title %></h2>
             <h3><%=book.authors%></h3>
             <p><%=book.desc%></p>
-            <!-- <form action="/new" method="POST">
-                <input  value="<%= book.imgUrl %>" >   
-                <input value="<%=book.title %>" > 
-                <input value=" <%= book.author%>">
-                <input value="<%= book.isbn%>">
-                <textarea  value="<%= book.description%>"></textarea>
-                <button type="submit">Add To List</button>
-            </form> -->
-        </li>
-    <% }) %>
+            <h4><%=book.isbn%></h4>
+            <p><%=book.bookshelf%></p>
 </ul>
 <footer>   
 </footer>
