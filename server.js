@@ -10,12 +10,12 @@ const pg = require('pg');
 const client = new pg.Client(process.env.DATABASE_URL);
 
 const PORT = process.env.PORT || 3000;
+
+
+server.use(express.urlencoded({ extended: true }));
 server.use(methodOverride('_method'));
-
-
 server.set('view engine', 'ejs')
 server.use(express.static('./public'));
-server.use(express.urlencoded({ extended: true }));
 
 function handleError(error, response) {
     response.render('pages/error', { error: error });
@@ -28,7 +28,20 @@ server.post('/search', searcheData);
 server.post('/new', processAdd);
 server.get('/books/:book_id', getSpecificBook);
 server.post('/edit', edaitSelected);
+server.put('/update/:book_id', updateBook);
 server.delete('/delete/:book_id', deleteBook);
+
+
+
+function updateBook(req,res){
+    let { image_url, title, author, description, isbn, bookshelf } = req.body
+    let SQL = 'UPDATE book SET image_url=$1, title=$2, author=$3, description=$4, isbn=$5, bookshelf=$6 WHERE id=$7;';
+    let values = [image_url, title, author, description, isbn, bookshelf, req.params.book_id];
+    client.query(SQL,values)
+    .then(res.redirect(`/books/${req.params.book_id}`))
+    .catch(err => handleError(err));
+}
+
 
 
 
