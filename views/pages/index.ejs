@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href= "/styles/base.css" rel="stylesheet" type="text/css" />
+    <link href= "/styles/layout.css" rel="stylesheet" type="text/css" />
+    <link href= "/styles/modules.css" rel="stylesheet" type="text/css" />
+
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <a href="/new">Add a New Book</a>
+        <a href="/">Home</a>  
+           </header> 
+    <section>
+        <ul>
+            <%let conut=0%>
+            <% booksList.forEach(book => { %>
+                <li>
+                    <%++conut%>
+                        <img src=<%= book.image_url%>>
+                        <h2 class="title"><%= book.title%></h2>
+                        <h3 class="author"><%= book.author%></h3>
+                       <form action="/books/<%= book.id%>" method="GET">
+                        <button type="submit">View Details</button>
+                    </form>
+                </li>
+                <% }) %>
+                <h2>Number of Books = <%=conut%></h2>
+            <!-- <% booksList.forEach(book => { %>
+                <li>
+                    <a href="/show/<%= booksList.id %>"><%= booksList.title %></a>
+                </li>
+            <% })%> -->
+        </ul>
+    </section>
+    <!-- <form action="/searches" method="POST">
+        <br>
+        <input type="text" name="input" placeholder="type the name" required>
+        <p>Please select your type</p>
+        <input  type="radio" name="select" value="author" required>author <br><br> 
+        <input  type="radio" name="select" value="title" required>title <br>
+        <button type="submit">submit</button>
+    </form> -->
+</body>
+</html>
